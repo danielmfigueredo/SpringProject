@@ -36,7 +36,7 @@ Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite g
    - Neste projeto, foi utilizada uma instância do MySQL para o gerenciamento e armazenamento dos dados.
 
 3. **Inicialização do Projeto**:
-   - Execute a aplicação usando o comando `mvn spring-boot:run`.
+   - Execute a aplicação usando o comando no diretório em que se encontra o projeto `mvn spring-boot:run`.
 
 4. **Acessar a Documentação da API**:
    - A documentação da API pode ser acessada em `http://localhost:8080/swagger-ui.html`.
