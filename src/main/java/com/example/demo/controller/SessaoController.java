@@ -15,11 +15,6 @@ public class SessaoController {
     @Autowired
     private SessaoService sessaoService;
 
-    // @PostMapping
-    // public Sessao criarSessao() {
-    //     return sessaoService.criarSessao();
-    // }
-
     @PostMapping("/abrir/{cargoId}")
     public ResponseEntity<Sessao> criarSessao(@PathVariable Long cargoId) {
         try {

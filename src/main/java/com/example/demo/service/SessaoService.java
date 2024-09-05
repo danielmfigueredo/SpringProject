@@ -58,11 +58,6 @@ public class SessaoService {
         sessao.addCandidato(candidato);
         return sessaoRepository.save(sessao);
     }
-    // public void votar(Long sessaoId, Long idEleitor, Long idCandidato) {
-    //     Sessao sessao = buscarSessaoPorId(sessaoId);
-    //     sessao.votar(idEleitor, idCandidato);
-    //     sessaoRepository.save(sessao);
-    // }
 
     public void votar(Long sessaoId, Long eleitorId, Long candidatoId) {
         Sessao sessao = buscarSessaoPorId(sessaoId);
@@ -144,7 +139,7 @@ public class SessaoService {
 
         relatorio.append("Total de votos ").append(totalVotos).append("\n");
 
-       relatorio.append("Vencedor: ").append(nomeVencedor).append("\n");
+        relatorio.append("Vencedor: ").append(nomeVencedor).append("\n");
 
         return relatorio.toString();
     }
