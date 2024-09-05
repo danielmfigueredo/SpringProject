@@ -12,6 +12,15 @@ public class Eleitor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private boolean votou;
+
+    public boolean isVotou() {
+        return votou;
+    }
+
+    public void setVotou(boolean votou) {
+        this.votou = votou;
+    }
 
     public Long getId() {
         return id;

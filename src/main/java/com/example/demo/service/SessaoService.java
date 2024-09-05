@@ -4,6 +4,8 @@ import com.example.demo.model.Candidato;
 import com.example.demo.model.Cargo;
 import com.example.demo.model.Eleitor;
 import com.example.demo.model.Sessao;
+import com.example.demo.repository.CandidatoRepository;
+import com.example.demo.repository.EleitorRepository;
 import com.example.demo.repository.SessaoRepository;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,12 @@ public class SessaoService {
 
     @Autowired
     private SessaoRepository sessaoRepository;
+
+    @Autowired
+    private CandidatoRepository candidatoRepository;
+
+    @Autowired
+    private EleitorRepository eleitorRepository;
 
     @Autowired
     private CandidatoService candidatoService; 
@@ -76,6 +84,11 @@ public class SessaoService {
         Candidato candidato = candidatoOptional.get();
         
         sessao.votar(eleitor, candidato);
+        eleitor.setVotou(true);
+        candidato.setParticipando(true);
+
+        eleitorRepository.save(eleitor);
+        candidatoRepository.save(candidato);
         sessaoRepository.save(sessao);
     }
 

@@ -26,11 +26,11 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public Cargo updateCargo(Long id, Cargo cargoDetails) {
+    public Cargo updateCargo(Long id, String nome) {
         Cargo cargo = cargoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cargo not found with id " + id));
 
-        cargo.setNome(cargoDetails.getNome());
+        cargo.setNome(nome);
         
         return cargoRepository.save(cargo);
     }

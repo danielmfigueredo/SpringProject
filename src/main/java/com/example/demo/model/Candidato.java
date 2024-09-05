@@ -12,6 +12,15 @@ public class Candidato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private boolean participando;
+
+    public boolean isParticipando() {
+        return participando;
+    }
+
+    public void setParticipando(boolean participando) {
+        this.participando = participando;
+    }
 
     public Long getId() {
         return id;

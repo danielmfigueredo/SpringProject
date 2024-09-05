@@ -37,8 +37,8 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cargo> updateCargo(@PathVariable Long id, @RequestBody Cargo cargoDetails) {
-        return ResponseEntity.ok(cargoService.updateCargo(id, cargoDetails));
+    public ResponseEntity<Cargo> updateCargo(@PathVariable Long id, @RequestParam String nome) {
+        return ResponseEntity.ok(cargoService.updateCargo(id, nome));
     }
 
     @DeleteMapping("/{id}")

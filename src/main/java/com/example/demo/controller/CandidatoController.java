@@ -31,14 +31,15 @@ public class CandidatoController {
     public ResponseEntity<Candidato> createCandidato(@RequestParam String nome) {
         Candidato candidato = new Candidato();
         candidato.setNome(nome);
+        candidato.setParticipando(false);
         Candidato novoCandidato = candidatoService.createCandidato(candidato);
         return ResponseEntity.ok(novoCandidato);
     }
     
 
     @PutMapping("/{id}")
-    public ResponseEntity<Candidato> updateCandidato(@PathVariable Long id, @RequestBody Candidato candidatoDetails) {
-        return ResponseEntity.ok(candidatoService.updateCandidato(id, candidatoDetails));
+    public ResponseEntity<Candidato> updateCandidato(@PathVariable Long id, @RequestParam String nome) {
+        return ResponseEntity.ok(candidatoService.updateCandidato(id, nome));
     }
 
     @DeleteMapping("/{id}")

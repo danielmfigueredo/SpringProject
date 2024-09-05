@@ -31,13 +31,14 @@ public class EleitorController {
     public ResponseEntity<Eleitor> createEleitor(@RequestParam String nome) {
         Eleitor eleitor = new Eleitor();
         eleitor.setNome(nome);
+        eleitor.setVotou(false);
         Eleitor novoEleitor = eleitorService.createEleitor(eleitor);
         return ResponseEntity.ok(novoEleitor);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Eleitor> updateEleitor(@PathVariable Long id, @RequestBody Eleitor eleitorDetails) {
-        return ResponseEntity.ok(eleitorService.updateEleitor(id, eleitorDetails));
+    public ResponseEntity<Eleitor> updateEleitor(@PathVariable Long id, @RequestParam String nome) {
+        return ResponseEntity.ok(eleitorService.updateEleitor(id, nome));
     }
 
     @DeleteMapping("/{id}")

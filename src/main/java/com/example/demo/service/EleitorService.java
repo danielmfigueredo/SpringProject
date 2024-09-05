@@ -26,11 +26,11 @@ public class EleitorService {
         return eleitorRepository.save(eleitor);
     }
 
-    public Eleitor updateEleitor(Long id, Eleitor eleitorDetails) {
+    public Eleitor updateEleitor(Long id, String nome) {
         Eleitor eleitor = eleitorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Eleitor not found with id " + id));
 
-        eleitor.setNome(eleitorDetails.getNome());
+        eleitor.setNome(nome);
         
         return eleitorRepository.save(eleitor);
     }
@@ -38,6 +38,13 @@ public class EleitorService {
     public void deleteEleitor(Long id) {
         Eleitor eleitor = eleitorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Eleitor not found with id " + id));
-        eleitorRepository.delete(eleitor);
+
+        if (!eleitor.isVotou()) {
+            eleitorRepository.delete(eleitor);
+        }
+
+        else{
+            throw new IllegalArgumentException("Eleitor já votou, não pode ser deletado");
+        }
     }
 }
