@@ -46,9 +46,9 @@ public class SessaoController {
     }
 
     @GetMapping("/{sessaoId}/votos")
-    public ResponseEntity<Map<Long, Integer>> obterVotos(@PathVariable Long sessaoId) {
+    public ResponseEntity<String> obterVotos(@PathVariable Long sessaoId) {
         try {
-            Map<Long, Integer> votos = sessaoService.obterVotos(sessaoId);
+            String votos = sessaoService.obterVotos(sessaoId);
             return ResponseEntity.ok(votos);
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body(null);

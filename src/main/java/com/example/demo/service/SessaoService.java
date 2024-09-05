@@ -5,6 +5,8 @@ import com.example.demo.model.Eleitor;
 import com.example.demo.model.Sessao;
 import com.example.demo.repository.SessaoRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,15 +92,57 @@ public class SessaoService {
         return sessaoOptional.get();
     }
 
-    public Map<Long, Integer> obterVotos(Long sessaoId) {
+    public String obterVotos(Long sessaoId) {
         Sessao sessao = buscarSessaoPorId(sessaoId);
 
         if (sessao.isAberta()) {
             throw new IllegalArgumentException("Sessão ainda está aberta.");
         }
 
-        return sessao.getVotosPorCandidato();
+        return gerarRelatorio(sessao.getVotosPorCandidato());
     }
 
+    public String gerarRelatorio(Map<Long, Integer> votosPorCandidato) {
+        StringBuilder relatorio = new StringBuilder();
+
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        relatorio.append("Data relatório: ").append(agora.format(formatter)).append("\n");
+
+        relatorio.append("Cargo: PRESIDENTE\n");
+
+        relatorio.append("Candidatos      Votos\n");
+        int totalVotos = 0;
+        Optional<Map.Entry<Long, Integer>> vencedor = Optional.empty();
+        String nomeVencedor = "Não há vencedor";
+
+        for (Map.Entry<Long, Integer> entry : votosPorCandidato.entrySet()) {
+            Long idCandidato = entry.getKey();
+            Integer votos = entry.getValue();
+            Optional<Candidato> candidato = candidatoService.getCandidatoById(idCandidato); 
+            String nomeCandidato;
+            if (candidato.isPresent()) {
+                nomeCandidato = candidato.get().getNome();
+            } else {
+                throw new IllegalArgumentException("Candidato não encontrado");
+            }
+
+            relatorio.append(String.format("%-15s %d\n", nomeCandidato, votos));
+            totalVotos += votos;
+
+            if ((vencedor.isEmpty() || votos > vencedor.get().getValue()) && votos > 0) {
+                vencedor = Optional.of(entry);
+                nomeVencedor = nomeCandidato;
+            }
+        }
+
+        // Adiciona o total de votos
+        relatorio.append("Total de votos ").append(totalVotos).append("\n");
+
+        // Adiciona o vencedor
+       relatorio.append("Vencedor: ").append(nomeVencedor).append("\n");
+
+        return relatorio.toString();
+    }
     
 }
