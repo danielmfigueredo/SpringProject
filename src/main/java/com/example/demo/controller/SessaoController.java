@@ -20,10 +20,10 @@ public class SessaoController {
     //     return sessaoService.criarSessao();
     // }
 
-    @PostMapping("/abrir")
-    public ResponseEntity<Sessao> criarSessao() {
+    @PostMapping("/abrir/{cargoId}")
+    public ResponseEntity<Sessao> criarSessao(@PathVariable Long cargoId) {
         try {
-            Sessao novaSessao = sessaoService.criarSessao();
+            Sessao novaSessao = sessaoService.criarSessao(cargoId);
             return ResponseEntity.ok(novaSessao);
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body(null); 

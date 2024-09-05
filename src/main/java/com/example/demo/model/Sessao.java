@@ -15,6 +15,9 @@ public class Sessao {
 
     private boolean aberta;
 
+    @ManyToOne
+    private Cargo cargo;
+
     @ManyToMany
     @JoinTable(
         name = "sessao_candidato",
@@ -26,8 +29,6 @@ public class Sessao {
     @ElementCollection
     private Map<Long, Integer> votosPorCandidato = new HashMap<>(); 
 
-    //@ElementCollection
-    //private Set<Long> eleitoresQueVotaram = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -37,8 +38,13 @@ public class Sessao {
     )
     private Set<Eleitor> eleitores = new HashSet<>();
 
-    public Sessao() {
-        this.aberta = true; 
+    public Sessao(){
+        this.aberta = true;
+    }
+
+    public Sessao(Cargo cargo) {
+        this.aberta = true;
+        this.cargo = cargo; 
     }
 
     public Long getId() {
@@ -97,5 +103,13 @@ public class Sessao {
             votosPorCandidato.clear();
         }
         this.aberta = false;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Cargo getCargo() {
+        return this.cargo;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Candidato;
+import com.example.demo.model.Cargo;
 import com.example.demo.model.Eleitor;
 import com.example.demo.model.Sessao;
 import com.example.demo.repository.SessaoRepository;
@@ -25,19 +26,24 @@ public class SessaoService {
     @Autowired
     private EleitorService eleitorService; 
 
-    // public Sessao criarSessao() {
-    //     Sessao sessao = new Sessao();
-    //     return sessaoRepository.save(sessao);
-    // }
+    @Autowired
+    private CargoService cargoService; 
 
-    public Sessao criarSessao() {
+    public Sessao criarSessao(Long cargoId) {
         // if (sessaoRepository.existsByAbertaTrue()) {
         //     throw new IllegalStateException("Já existe uma sessão aberta. Feche-a antes de abrir uma nova.");
         // }
 
-        Sessao novaSessao = new Sessao();
-        novaSessao.setAberta(true);
-        return sessaoRepository.save(novaSessao);
+        Optional<Cargo> cargoSessao = cargoService.getCargoById(cargoId);
+        if (cargoSessao.isPresent()){
+            Sessao novaSessao = new Sessao(cargoSessao.get());
+            novaSessao.setAberta(true);
+            return sessaoRepository.save(novaSessao);
+        }
+        else {
+            throw new IllegalArgumentException("Cargo não existe.");
+        }
+        
     }
 
     public Sessao adicionarCandidato(Long sessaoId, Long candidatoId) {
@@ -99,17 +105,17 @@ public class SessaoService {
             throw new IllegalArgumentException("Sessão ainda está aberta.");
         }
 
-        return gerarRelatorio(sessao.getVotosPorCandidato());
+        return gerarRelatorio(sessao.getVotosPorCandidato(), sessao.getCargo().getNome());
     }
 
-    public String gerarRelatorio(Map<Long, Integer> votosPorCandidato) {
+    public String gerarRelatorio(Map<Long, Integer> votosPorCandidato, String cargo) {
         StringBuilder relatorio = new StringBuilder();
 
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         relatorio.append("Data relatório: ").append(agora.format(formatter)).append("\n");
 
-        relatorio.append("Cargo: PRESIDENTE\n");
+        relatorio.append("Cargo: ").append(cargo).append("\n");
 
         relatorio.append("Candidatos      Votos\n");
         int totalVotos = 0;
@@ -136,10 +142,8 @@ public class SessaoService {
             }
         }
 
-        // Adiciona o total de votos
         relatorio.append("Total de votos ").append(totalVotos).append("\n");
 
-        // Adiciona o vencedor
        relatorio.append("Vencedor: ").append(nomeVencedor).append("\n");
 
         return relatorio.toString();
