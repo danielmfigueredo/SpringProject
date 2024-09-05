@@ -1,5 +1,3 @@
-# SpringProject
-
 # Sistema Eleitoral
 
 Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite gerenciar sessões eleitorais, candidatos e eleitores. Abaixo estão descritas as funcionalidades principais do sistema:
