@@ -63,7 +63,7 @@ Foram criadas quatro classes principais: **Eleitor**, **Candidato**, **Cargo** e
   - Enviar uma requisição POST para `/sessoes/{id}/votar` com o ID do candidato e o ID do eleitor.
 
 - **Fechar Sessão**:
-  - Enviar uma requisição POST para `/sessoes/{id}/fechar`.
+  - Enviar uma requisição PATCH para `/sessoes/{id}/fechar`.
 
 - **Gerar Relatório das Sessões Fechadas**:
   - Enviar uma requisição GET para `/sessoes/{sessaoId}/votos`.
