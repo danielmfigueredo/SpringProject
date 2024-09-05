@@ -27,17 +27,16 @@ Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite g
 ## Configuração do Projeto
 
 1. **Importar Projeto**:
-   - Certifique-se de que o Java 17 e o Maven estão instalados.
-   **Clone o Repositório**
+   - Certifique-se de que o Java 17 e o Maven estão instalados e clone o repositório:
    ```bash
-   git clone <URL-do-repositório>
+   git clone https://github.com/danielmfigueredo/SpringProject.git
 
 2. **Configuração do Banco de Dados**:
-   - Configure a conexão com o banco de dados no arquivo `application.properties` ou `application.yml`.
+   - Configure a conexão com o banco de dados no arquivo `application.properties`.
    - Neste projeto, foi utilizada uma instância do MySQL para o gerenciamento e armazenamento dos dados.
 
 3. **Inicialização do Projeto**:
-   - Execute a aplicação usando o comando `mvn spring-boot:run` ou `./gradlew bootRun`, dependendo do seu gerenciador de build.
+   - Execute a aplicação usando o comando `mvn spring-boot:run`.
 
 4. **Acessar a Documentação da API**:
    - A documentação da API pode ser acessada em `http://localhost:8080/swagger-ui.html`.
