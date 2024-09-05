@@ -18,16 +18,23 @@ Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite g
 - **Java 17**
 - **Spring Boot 3.3.3**
 - **Spring Framework**
+- **Spring Data JPA**
+- **Spring Web**
 - **Springdoc 2.0.2**: Biblioteca utilizada para integração com Swagger para documentação da API.
+- **Maven**: Gerenciador de build utilizado para gerenciamento de dependências e construção do projeto.
+- **MySQL**: Banco de dados utilizado para o gerenciamento e armazenamento dos dados.
 
 ## Configuração do Projeto
 
-1. **Instalar Dependências**:
-   - Certifique-se de que o Java 17 está instalado.
-   - Adicione as dependências do Spring Boot, Spring Framework e Springdoc no seu arquivo `pom.xml` (para Maven) ou `build.gradle` (para Gradle).
+1. **Importar Projeto**:
+   - Certifique-se de que o Java 17 e o Maven estão instalados.
+   **Clone o Repositório**
+   ```bash
+   git clone <URL-do-repositório>
 
 2. **Configuração do Banco de Dados**:
    - Configure a conexão com o banco de dados no arquivo `application.properties` ou `application.yml`.
+   - Neste projeto, foi utilizada uma instância do MySQL para o gerenciamento e armazenamento dos dados.
 
 3. **Inicialização do Projeto**:
    - Execute a aplicação usando o comando `mvn spring-boot:run` ou `./gradlew bootRun`, dependendo do seu gerenciador de build.
@@ -41,7 +48,7 @@ Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite g
   - Enviar uma requisição POST para `/sessoes/abrir/{cargoId}` com o cargo no corpo da requisição.
   
 - **Adicionar Candidato à Sessão**:
-  - Enviar uma requisição POST para `/sessoes//{sessaoId}/candidatos/{candidatoId}` com os IDs do candidato e da sessão.
+  - Enviar uma requisição POST para `/sessoes/{sessaoId}/candidatos/{candidatoId}` com os IDs do candidato e da sessão.
 
 - **Computar Voto**:
   - Enviar uma requisição POST para `/sessoes/{id}/votar` com o ID do candidato e o ID do eleitor.
