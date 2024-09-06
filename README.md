@@ -2,6 +2,16 @@
 
 Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite gerenciar sessões eleitorais, candidatos e eleitores. Abaixo estão descritas as funcionalidades principais do sistema:
 
+## Lógica
+
+Foram criadas quatro classes principais: **Eleitor**, **Candidato**, **Cargo** e **Sessão**.
+
+- **Cargo**: possui dois atributos, `nome` e `id`, representando o cargo que está em disputa.
+- **Candidato**: possui `nome`, `id` e um booleano `participando`, que indica se ele já recebeu votos, o que impede que seja removido do sistema.
+- **Eleitor**: possui `nome`, `id` e um booleano `votou`, indicando se o eleitor já votou em uma determinada sessão, também impedindo sua exclusão se tiver votado.
+- **Sessão**: é a principal responsável pela lógica do sistema. Ela é composta por um conjunto (`Set`) de candidatos e outro de eleitores que já votaram. Além disso, cada sessão possui um `id` e um `cargo`. A lógica de controle de votos e candidatos ocorre dentro dessa classe, garantindo que um eleitor vote apenas uma vez e que candidatos duplicados não sejam adicionados à sessão.
+
+
 ## Funcionalidades
 
 - **CRUD de Eleitor**: Adicionar, atualizar, visualizar e remover eleitores.
@@ -50,15 +60,14 @@ Esta é uma aplicação que simula um sistema eleitoral. A aplicação permite g
   - Enviar uma requisição POST para `/sessoes/{sessaoId}/candidatos/{candidatoId}` com os IDs do candidato e da sessão.
 
 - **Computar Voto**:
-  - Enviar uma requisição POST para `/sessoes/{id}/votar` com o ID do candidato e o ID do eleitor.
+  - Enviar uma requisição POST para `/sessoes/{sessaoId}/votar` com o ID do candidato e o ID do eleitor.
 
 - **Fechar Sessão**:
-  - Enviar uma requisição POST para `/sessoes/{id}/fechar`.
+  - Enviar uma requisição PATCH para `/sessoes/{sessaoId}/fechar`.
 
 - **Gerar Relatório das Sessões Fechadas**:
   - Enviar uma requisição GET para `/sessoes/{sessaoId}/votos`.
 
 ---
-
-Para mais detalhes sobre a implementação, consulte o código fonte e a documentação gerada pelo Swagger.
+Link para o vídeo de demonstração: https://www.youtube.com/watch?v=L6CvkmMmCg0
 
