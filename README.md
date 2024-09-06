@@ -33,6 +33,7 @@ Foram criadas quatro classes principais: **Eleitor**, **Candidato**, **Cargo** e
 - **Springdoc 2.0.2**: Biblioteca utilizada para integração com Swagger para documentação da API.
 - **Maven**: Gerenciador de build utilizado para gerenciamento de dependências e construção do projeto.
 - **MySQL**: Banco de dados utilizado para o gerenciamento e armazenamento dos dados.
+- **Mockito**: Para testes unitários dos controllers.
 
 ## Configuração do Projeto
 
