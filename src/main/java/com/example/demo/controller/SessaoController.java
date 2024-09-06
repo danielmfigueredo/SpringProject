@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Sessao;
 import com.example.demo.service.SessaoService;
 
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,7 @@ public class SessaoController {
         sessaoService.votar(sessaoId, idEleitor, idCandidato);
     }
 
-    @PostMapping("/{sessaoId}/fechar")
+    @PatchMapping("/{sessaoId}/fechar")
     public void fecharSessao(@PathVariable Long sessaoId) {
         sessaoService.fecharSessao(sessaoId);
     }
