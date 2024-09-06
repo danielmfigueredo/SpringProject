@@ -69,6 +69,5 @@ Foram criadas quatro classes principais: **Eleitor**, **Candidato**, **Cargo** e
   - Enviar uma requisição GET para `/sessoes/{sessaoId}/votos`.
 
 ---
-
-Para mais detalhes sobre a implementação, consulte o código fonte e a documentação gerada pelo Swagger.
+Link para o vídeo de demonstração: https://www.youtube.com/watch?v=L6CvkmMmCg0
 
